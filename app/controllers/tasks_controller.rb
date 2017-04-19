@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
-# before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy, :edit, :update]
+  #before_action :set_task, only: [:edit, :update]
   
 #  def index
 #    @tasks = Task.all.page(params[:page]).per(10)
@@ -63,6 +63,19 @@ class TasksController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def edit                                                                                 
+  end                                                                                      
+
+  def update                                                                               
+    if @task.update(task_params)                                                         
+    flash[:success] = 'Task は正常に更新されました'                                      
+      #redirect_to @task
+      redirect_to root_url
+    else                                                                                   
+      flash.now[:danger] = 'Task は更新されませんでした'                                   
+      render :edit                                                                         
+    end                                                                                    
+  end 
   
   private
 
