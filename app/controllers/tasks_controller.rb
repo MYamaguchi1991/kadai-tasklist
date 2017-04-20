@@ -53,7 +53,8 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'メッセージの投稿に失敗しました。'
-      render 'toppages/index'
+      #render 'toppages/index'
+      render 'tasks/new'
     end
   end
 
